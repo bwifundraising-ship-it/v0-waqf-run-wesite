@@ -30,7 +30,7 @@ export default function EventInfo() {
 
           {/* Card 3 */}
           <div className="bg-white rounded-lg p-8 shadow-md border-l-4 border-foreground">
-            <div className="text-4xl font-bold text-secondary mb-4 bg-[rgba(49,13,113,1)]">🎁</div>
+            <div className="text-4xl font-bold text-secondary mb-4 bg-transparent">🎁</div>
             <h3 className="text-xl font-semibold text-primary mb-3">Hadiah Menarik</h3>
             <p className="text-foreground/70">
               Dapatkan kesempatan memenangkan hadiah menarik dan merchandise eksklusif WAQF RUN.
