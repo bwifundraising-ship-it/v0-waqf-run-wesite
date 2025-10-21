@@ -21,7 +21,7 @@ export default function Hero() {
 
   useEffect(() => {
     const calculateTimeLeft = () => {
-      const eventDate = new Date("2025-12-22").getTime()
+      const eventDate = new Date("2025-12-14T06:30:00").getTime()
       const now = new Date().getTime()
       const difference = eventDate - now
 
@@ -48,7 +48,7 @@ export default function Hero() {
           <div className="space-y-6">
             <div>
               <h1 className="text-4xl md:text-5xl font-bold text-primary mb-2">WAQF RUN 2025</h1>
-              <p className="text-xl font-semibold text-[rgba(45,30,96,1)]">Berlari, Berwakaf, Peduli Palestina   </p>
+              <p className="text-xl font-semibold text-[rgba(45,30,96,1)]">Berlari, Berwakaf, Peduli Palestina </p>
             </div>
 
             <p className="text-lg text-foreground/80">
@@ -103,8 +103,8 @@ export default function Hero() {
                 <p className="text-lg font-semibold text-primary">14 Desember 2025</p>
               </div>
               <div className="bg-secondary/10 rounded-lg p-4">
-                <p className="text-sm text-foreground/60">Jarak</p>
-                <p className="text-lg font-semibold text-primary">5K Run</p>
+                <p className="text-sm text-foreground/60">Waktu Mulai</p>
+                <p className="text-lg font-semibold text-primary">06:30 WIB</p>
               </div>
             </div>
           </div>
