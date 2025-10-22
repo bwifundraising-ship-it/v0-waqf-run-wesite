@@ -1,22 +1,24 @@
 "use client"
 
 import { useState } from "react"
+import type { User } from "@supabase/supabase-js"
 import DashboardNav from "./dashboard-nav"
 import ProfileSection from "./profile-section"
 import RegistrationDetails from "./registration-details"
 import QRCodeSection from "./qr-code-section"
 import RaceInformation from "./race-information"
+import LogoutButton from "./logout-button"
 
 type DashboardTab = "overview" | "profile" | "qr-code" | "race-info"
 
-export default function DashboardContent() {
+export default function DashboardContent({ user }: { user: User }) {
   const [activeTab, setActiveTab] = useState<DashboardTab>("overview")
 
   // Mock user data - TODO: Replace with actual data from database
   const userData = {
     id: "WAQF-2025-001",
-    fullName: "John Doe",
-    email: "john@example.com",
+    fullName: user?.user_metadata?.full_name || "John Doe",
+    email: user?.email || "john@example.com",
     phone: "+62 812 3456 7890",
     dateOfBirth: "1990-05-15",
     gender: "male",
@@ -44,9 +46,12 @@ export default function DashboardContent() {
     <div className="py-8 md:py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-primary mb-2">Dashboard Peserta</h1>
-          <p className="text-lg text-foreground/70">Kelola informasi pendaftaran WAQF RUN 2025 Anda</p>
+        <div className="mb-8 flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl md:text-4xl font-bold text-primary mb-2">Dashboard Peserta</h1>
+            <p className="text-lg text-foreground/70">Kelola informasi pendaftaran WAQF RUN 2025 Anda</p>
+          </div>
+          <LogoutButton />
         </div>
 
         {/* Navigation */}
