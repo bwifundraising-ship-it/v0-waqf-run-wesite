@@ -4,15 +4,14 @@ import { NextResponse, type NextRequest } from "next/server"
 export async function updateSession(request: NextRequest) {
   let response = NextResponse.next({ request })
 
-  // Get environment variables
-  const url = process.env.SUPABASE_SUPABASE_NEXT_PUBLIC_SUPABASE_URL || ""
-  const key = process.env.SUPABASE_NEXT_PUBLIC_SUPABASE_ANON_KEY_ANON_KEY || ""
+  const supabaseUrl = process.env.SUPABASE_NEXT_PUBLIC_SUPABASE_URL
+  const supabaseAnonKey = proSUPABASE_NEXT_PUBLIC_SUPABASE_ANON_KEY_ANON_KEY
 
-  if (!url || !key) {
+  if (!supabaseUrl || !supabaseAnonKey) {
     return response
   }
 
-  const supabase = createServerClient(url, key, {
+  const supabase = createServerClient(supabaseUrl, supabaseAnonKey, {
     cookies: {
       getAll() {
         return request.cookies.getAll()
@@ -35,9 +34,9 @@ export async function updateSession(request: NextRequest) {
     !request.nextUrl.pathname.startsWith("/auth") &&
     !request.nextUrl.pathname.startsWith("/api")
   ) {
-    const url = request.nextUrl.clone()
-    url.pathname = "/auth/login"
-    return NextResponse.redirect(url)
+    const redirectUrl = request.nextUrl.clone()
+    redirectUrl.pathname = "/auth/login"
+    return NextResponse.redirect(redirectUrl)
   }
 
   return response
