@@ -24,7 +24,6 @@ export default function PaymentPage() {
   const [paymentUrl, setPaymentUrl] = useState("")
 
   useEffect(() => {
-    // Parse payment data from URL params
     const data = {
       registrationId: searchParams.get("registrationId") || "",
       participantName: searchParams.get("name") || "",
@@ -34,7 +33,7 @@ export default function PaymentPage() {
       waqfAmount: Number(searchParams.get("waqfAmount")) || 0,
     }
     setPaymentData(data)
-  }, [searchParams])
+  }, [])
 
   const handleCreateInvoice = async () => {
     if (!paymentData) return

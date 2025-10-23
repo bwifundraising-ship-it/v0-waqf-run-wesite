@@ -23,25 +23,6 @@ export default function AuthLayout({ title, subtitle, children }: AuthLayoutProp
 
         {/* Form Container */}
         <div className="bg-white rounded-lg shadow-lg p-8 border border-border">{children}</div>
-
-        {/* Footer Links */}
-        <div className="text-center mt-6 text-sm text-foreground/70">
-          {title === "Login" ? (
-            <>
-              Belum punya akun?{" "}
-              <Link href="/register" className="text-secondary font-semibold hover:text-secondary/80 transition-colors">
-                Daftar di sini
-              </Link>
-            </>
-          ) : (
-            <>
-              Sudah punya akun?{" "}
-              <Link href="/login" className="text-secondary font-semibold hover:text-secondary/80 transition-colors">
-                Login di sini
-              </Link>
-            </>
-          )}
-        </div>
       </div>
     </div>
   )
