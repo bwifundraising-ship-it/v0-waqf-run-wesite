@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { ChevronLeft, ChevronRight } from "lucide-react"
 
 interface TimeLeft {
   days: number
@@ -18,6 +19,10 @@ export default function Hero() {
     minutes: 0,
     seconds: 0,
   })
+
+  const [currentSlide, setCurrentSlide] = useState(0)
+
+  const carouselImages = ["/waqf-run-branding-2025.png", "/waqf-run-finish-line.jpg", "/waqf-run-street-race.jpg"]
 
   useEffect(() => {
     const calculateTimeLeft = () => {
@@ -39,6 +44,22 @@ export default function Hero() {
     const timer = setInterval(calculateTimeLeft, 1000)
     return () => clearInterval(timer)
   }, [])
+
+  useEffect(() => {
+    const autoScroll = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % carouselImages.length)
+    }, 5000) // Auto-scroll every 5 seconds
+
+    return () => clearInterval(autoScroll)
+  }, [])
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % carouselImages.length)
+  }
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + carouselImages.length) % carouselImages.length)
+  }
 
   return (
     <section className="relative bg-gradient-to-b from-secondary/20 to-background py-12 md:py-20">
@@ -109,14 +130,51 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right side - Image */}
+          {/* Right side - Image Carousel */}
           <div className="relative h-96 md:h-full">
             <div className="absolute inset-0 bg-gradient-to-br from-secondary/30 to-blue-500/30 rounded-lg overflow-hidden">
-              <img
-                src="/runners-jogging-event-marathon.jpg"
-                alt="WAQF RUN 2025 Event"
-                className="w-full h-full object-cover rounded-lg"
-              />
+              <div className="relative w-full h-full">
+                {carouselImages.map((image, index) => (
+                  <img
+                    key={index}
+                    src={image || "/placeholder.svg"}
+                    alt={`WAQF RUN 2025 Event ${index + 1}`}
+                    className={`absolute w-full h-full object-cover rounded-lg transition-opacity duration-500 ${
+                      index === currentSlide ? "opacity-100" : "opacity-0"
+                    }`}
+                  />
+                ))}
+              </div>
+
+              {/* Navigation Buttons */}
+              <button
+                onClick={prevSlide}
+                className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
+                aria-label="Previous slide"
+              >
+                <ChevronLeft size={24} />
+              </button>
+              <button
+                onClick={nextSlide}
+                className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
+                aria-label="Next slide"
+              >
+                <ChevronRight size={24} />
+              </button>
+
+              {/* Slide Indicators */}
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 flex gap-2">
+                {carouselImages.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentSlide(index)}
+                    className={`w-2 h-2 rounded-full transition-all ${
+                      index === currentSlide ? "bg-white w-6" : "bg-white/50"
+                    }`}
+                    aria-label={`Go to slide ${index + 1}`}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>
