@@ -22,7 +22,7 @@ export default function Hero() {
 
   const [currentSlide, setCurrentSlide] = useState(0)
 
-  const carouselImages = ["/waqf-run-branding-2025.png", "/waqf-run-finish-line.jpg", "/waqf-run-street-race.jpg"]
+  const carouselImages = ["/waqf-run-start-line.jpg", "/waqf-run-finish-line.jpg", "/waqf-run-street-race.jpg"]
 
   useEffect(() => {
     const calculateTimeLeft = () => {
