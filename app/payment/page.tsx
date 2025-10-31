@@ -11,6 +11,7 @@ interface PaymentData {
   registrationId: string
   participantName: string
   email: string
+  phoneNumber: string
   amount: number
   tshirtSize: string
   waqfAmount: number
@@ -28,6 +29,7 @@ export default function PaymentPage() {
       registrationId: searchParams.get("registrationId") || "",
       participantName: searchParams.get("name") || "",
       email: searchParams.get("email") || "",
+      phoneNumber: searchParams.get("phoneNumber") || "",
       amount: Number(searchParams.get("amount")) || 0,
       tshirtSize: searchParams.get("tshirtSize") || "",
       waqfAmount: Number(searchParams.get("waqfAmount")) || 0,
@@ -148,6 +150,10 @@ export default function PaymentPage() {
               <div className="flex justify-between">
                 <span className="text-foreground/70">Email:</span>
                 <span className="font-semibold text-foreground">{paymentData.email}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-foreground/70">Nomor Telepon:</span>
+                <span className="font-semibold text-foreground">{paymentData.phoneNumber}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-foreground/70">Ukuran Kaos:</span>

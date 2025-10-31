@@ -10,6 +10,7 @@ export default function RegisterForm() {
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
+    phoneNumber: "",
     gender: "",
     tshirtSize: "",
     additionalWaqf: "",
@@ -38,8 +39,7 @@ export default function RegisterForm() {
     e.preventDefault()
     setError("")
 
-    // Validation
-    if (!formData.fullName || !formData.email || !formData.gender || !formData.tshirtSize) {
+    if (!formData.fullName || !formData.email || !formData.phoneNumber || !formData.gender || !formData.tshirtSize) {
       setError("Semua field wajib diisi")
       return
     }
@@ -55,6 +55,7 @@ export default function RegisterForm() {
       const registrationData = {
         fullName: formData.fullName,
         email: formData.email,
+        phoneNumber: formData.phoneNumber,
         gender: formData.gender,
         tshirtSize: formData.tshirtSize,
         registrationFee: 200000,
@@ -62,8 +63,22 @@ export default function RegisterForm() {
         totalAmount: 200000 + (formData.additionalWaqf ? Number.parseInt(formData.additionalWaqf) : 0),
       }
 
+      const registrationId = `REG-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+      const waqfAmount = formData.additionalWaqf ? Number.parseInt(formData.additionalWaqf) : 0
+      const totalAmount = 200000 + waqfAmount
+
+      const paymentParams = new URLSearchParams({
+        registrationId,
+        name: formData.fullName,
+        email: formData.email,
+        phoneNumber: formData.phoneNumber,
+        tshirtSize: formData.tshirtSize,
+        amount: totalAmount.toString(),
+        waqfAmount: waqfAmount.toString(),
+      })
+
       sessionStorage.setItem("registrationData", JSON.stringify(registrationData))
-      router.push("/payment")
+      router.push(`/payment?${paymentParams.toString()}`)
     } catch (err) {
       setError("Terjadi kesalahan. Silakan coba lagi.")
     } finally {
@@ -104,6 +119,22 @@ export default function RegisterForm() {
           value={formData.email}
           onChange={handleChange}
           placeholder="nama@email.com"
+          required
+          className="w-full px-4 py-2 border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/50 bg-background text-foreground"
+        />
+      </div>
+
+      <div>
+        <label htmlFor="phoneNumber" className="block text-sm font-medium text-foreground mb-2">
+          Nomor Telepon
+        </label>
+        <input
+          id="phoneNumber"
+          type="tel"
+          name="phoneNumber"
+          value={formData.phoneNumber}
+          onChange={handleChange}
+          placeholder="08xxxxxxxxxx"
           required
           className="w-full px-4 py-2 border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary/50 bg-background text-foreground"
         />

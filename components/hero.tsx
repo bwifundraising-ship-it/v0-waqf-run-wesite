@@ -118,7 +118,7 @@ export default function Hero() {
             </div>
 
             {/* Event Details */}
-            <div className="grid grid-cols-2 gap-4 pt-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4">
               <div className="bg-secondary/10 rounded-lg p-4">
                 <p className="text-sm text-foreground/60">Tanggal</p>
                 <p className="text-lg font-semibold text-primary">14 Desember 2025</p>
@@ -126,6 +126,15 @@ export default function Hero() {
               <div className="bg-secondary/10 rounded-lg p-4">
                 <p className="text-sm text-foreground/60">Waktu Mulai</p>
                 <p className="text-lg font-semibold text-primary">06:30 WIB</p>
+              </div>
+              <div className="bg-secondary/10 rounded-lg p-4">
+                <p className="text-sm text-foreground/60">Tempat</p>
+                <p className="text-lg font-semibold text-primary">Plaza Tenggara GBK</p>
+              </div>
+              <div className="bg-secondary/10 rounded-lg p-4">
+                <p className="text-sm text-foreground/60">HTM</p>
+                <p className="text-lg font-semibold text-primary">RP. 200.000</p>
+                <p className="text-xs text-foreground/50 mt-2">Rp 150.000 (Pendaftaran) + Rp 50.000 (Wakaf)</p>
               </div>
             </div>
           </div>
